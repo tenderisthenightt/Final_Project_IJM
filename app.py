@@ -198,6 +198,8 @@ def save(): # 경로에서 실행될 기능 선언
 def text_to_img():
     return render_template('3rd_test.html')
 
+yolo_model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'best.pt', force_reload =True)
+
 @app.route("/predict", methods=["GET", "POST"])
 def predict():
     print('1111111111111111')
@@ -222,15 +224,15 @@ def predict():
     
     
     # Model(YOLOv5 종속 항목 설치)
-    model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'best.pt', force_reload =True)
+
     # Image
     print('asdadasdasdasdas')
     img = PIL.Image.open('image.png')
     print('ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅁㄴㅇㅁㄴㅇㅁㄴㅇ')
     ########## 이 사진을 어떻게 가지고 올지에 대해서 알아봐야한다. !!
-
+    global yolo_model
     # 추론
-    results = model(img)
+    results = yolo_model(img)
 
 
     # 결과
