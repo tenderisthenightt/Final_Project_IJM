@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>check</title>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-32x32.png') }}" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-16x16.png') }}" sizes="16x16" />
+  <title>MCI</title>
+
+    <!--stylesheet-->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/static/styles/huiyacanvars.css') }}" type="text/css">
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+    .container {width: 28rem; text-align: center; margin-top: 0rem;}
+
+    .form-group {margin-bottom: 0rem;}
+
+    body {background: linear-gradient(274deg, #359e78, #62e2e2 44%, #b0ea51)};
+
+    h1 {font-family: 'Times New Roman', Times, serif; padding: 7px;}
+
+    li {font-weight: bolder; list-style: none; font-size: 15px}
+
+    span {font-weight: lighter;}
+
+      #image-container {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+      }
+      #image-container img {
+        width: 150px;
+        height: 150px;
+      }
+      #speech-bubble {
+        display: none;
+        position: absolute;
+        bottom: 140px;
+        right: 20px;
+        top: -115px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      #image-container:hover #speech-bubble {
+        display: block;
+      }
+
+    </style>
+  </head>
+
+<body>
+  <br>
+  <h1 align="center"> 숫자 색 맞히기 </h1>
+  <h6>
+    <p style="text-align:center;">글자의 색깔이 무엇인지 입력해주세요<br> - 빨강 파랑 노랑 검정 - 
+  </h6>
+
+  <div id="image-container">
+    <img src="{{ url_for('static', filename = 'face/jungeun.png')}}" alt="Image">
+    <div id="speech-bubble">
+      <p>스트루프 박사가 만든<br> 스트루프 이론에서<br> 비롯된 게임이야</p>
+    </div>
+
+  </div>
+  <div class="container">
+    <div style="border: px solid; padding :10px; width: 820px; 
+      height: 450px ; border-radius:2em; margin-left: -190px; overflow: hidden;
+    padding-top:10px; background-color:rgba(255, 255, 255, 0.744) ">
+
+    <!--모델-->
+      <div>
+        <img id="image" src="{{ url_for('static', filename='2/img/001.png') }}" class="img-fluid" alt="Square Image">
+        <!-- <img id="image" src="static/img/001.png" class="img-fluid" alt="Square Image"> -->
+      </div>
+    </div>
+    <div class="form-group">
+      <input id="input" type="text" class="form-control" placeholder="여기에 입력">
+    </div>
+    </div>
+    <script>
+      //let content = "반응 시간,파일 이름,정답,입력,정오\n";
+      let prevTime = Date.now();
+      let index = 0;
+      //const correctAnswers = ['1', '2', '3', '4', '5', '6', '7', '8', '9']; // 확인용
+      const correctAnswers = ['빨강', '파랑', '노랑', '빨강', '파랑', '검정', '노랑', '빨강', '검정'];
+      document.getElementById('submit').addEventListener('click', function () { // submit을 클리하면 함수 실행
+          let value = document.getElementById('input').value;
+          //let filename = `1/${(index + 1).toString().padStart(3, '0')}.png`;
+
+          //content += `${(Date.now() - prevTime)/1000},${filename},${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}\n`; 
+          //content +    반응시간                        파일 이름   정답                      입력      정오          
+          document.getElementById('input').value = '';
+          prevTime = Date.now();
+          
+
+          //지영
+          content = `${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}`; // 위의 content 중에서 필요한 것 만 갖고와서 다시 변수만들기
+          index++;//index content 뒤에 둬야 1씩추가됨.. 아니면 2번째부터 시작
+          let formData = new FormData(); // 새로운 변수 생성
+          formData.append("result", content); //변수에 저장
+          let check = new FormData(); // 새로운 변수 생성
+          check.append("check", correctAnswers); //변수에 저장
+          let xhr = new XMLHttpRequest();
+          xhr.open("POST", "/save", true); // post 방식으로 / url ->save  보낸다.
+          xhr.send(formData); // formData 변수를 보낸다.
+       
+          if (index >= correctAnswers.length) {
+            
+            return;
+        }
+      
+       
+
+          document.getElementById('image').src = `static/2/img/${(index + 1).toString().padStart(3, '0')}.png`;
+          // document.getElementById('image').src = `1/001.png`
+          // document.getElementById('image').src = `1/002.png`
+          // document.getElementById('image').src = `1/003.png`
+          // document.getElementById('image').src = `1/004.png`
+          // document.getElementById('image').src = `1/005.png`
+          // document.getElementById('image').src = `1/006.png`
+          // document.getElementById('image').src = `1/007.png`
+          // document.getElementById('image').src = `1/008.png`
+          // document.getElementById('image').src = `1/009.png`;
+
+          // document.getElementById('image').src = `static/img/1/001.png`;
+          // document.getElementById('image').src = `static/img/1/002.png`;
+          // document.getElementById('image').src = `static/img/1/003.png`;
+          // document.getElementById('image').src = `static/img/1/004.png`;
+          // document.getElementById('image').src = `static/img/1/005.png`;
+          // document.getElementById('image').src = `static/img/1/006.png`;
+          // document.getElementById('image').src = `static/img/1/007.png`;
+          // document.getElementById('image').src = `static/img/1/008.png`;
+          // document.getElementById('image').src = `static/img/1/009.png`;
+      })
+    
+    var input = document.getElementById("input");
+    input.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("submit").click();
+      }
+  });
+  // 엔터 submit기능 
+  </script>
+  <!--모델 끝-->
+
+
+</div>
+<h2>
+  <div>
+    <center>
+      <br>
+      <input type="button" value="다음으로 넘어가기" style="
+                width: 180px; height:100; padding-top:12px; padding-bottom:12px;
+                border-radius:15px; cursor : pointer ;  font-size:19px; 
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-weight:bolder;  color:rgb(0, 0, 0); " onClick="window.location.href='/text_to_img'">
+    </center>
+  </div>
+</h2>
+<h3>
+  <form align="center">
+    <center>
+      <div style="border: 2px solid; padding :10px; height: 85px; width: 200px;
+                    padding-top:7px; background-color:rgba(255, 255, 255, 0.455);">
+        <p style="margin-top:1px;  font-size:26px; "> provided by<br> Team.인절미</p>
+      </div>
+    </center>
+  </form>
+</h3>
+<br>
+<br>
+</section>
+
+<footer class="footer text-center">
+  <div class="container">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white" href="javascript:void(0)">
+          <i class="fa fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+    <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
+    <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
+  </div>
+</footer>
+
+<!--scripts-->
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+</body>
+</html>
