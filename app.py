@@ -581,15 +581,44 @@ def STT():
         #--------------------------------------------------------------------------
         
         String = ''
+        Score = 0
         if NLP_reuslt == 'paraphrase' :
-            String += '유사합니다'
+            String += 'O'
+            Score = 1
         else:
-            String += '유사하지 않습니다'
+            String += 'X'
             
         # os.remove(audioFilePath)
         print(sentence2)
         print(sentence1)
         print(String)
+        
+        conn = sql.connect(DATABASE_URI, isolation_level=None)
+        cur = conn.cursor()
+
+        cur.execute("UPDATE STT SET user_sound = '%s' WHERE id = '%s'" %(sentence1, 1))
+        cur.execute("UPDATE STT SET ck = '%s' WHERE id = '%s'" %(String, 1))
+        cur.execute("UPDATE STT SET score = '%s' WHERE id = '%s'" %(Score, 1))
+        
+        conn.commit()
+        cur.close()
+        
+        #-----------------------------------------------------------------------------
+        
+        conn = sql.connect(DATABASE_URI, isolation_level=None)
+        cur = conn.cursor()
+                
+        cur.execute("SELECT * FROM STT")
+        STT_Data = str(cur.fetchmany(size=1))
+        STT_Data = STT_Data.split("'")
+        cur.close()
+        
+        stt_id = STT_Data[1]
+        stt_target = STT_Data[3]
+        stt_user_sound = STT_Data[5]
+        stt_ck = STT_Data[7]
+        stt_score = STT_Data[9]
+        
         #                                             정답문장          TTS        체크 결과
     # return render_template('6th_test.html', target = sentence2, sound = sentence1, ck=String)
     return jsonify({'sound':sentence2})
