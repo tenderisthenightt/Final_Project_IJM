@@ -290,17 +290,17 @@ def find_diff():
 count = 0
 test_class = ['나비','지렁이','컴퓨터']
 # 밑에 next를 안 넣고 count>=3 을 하면 오류남 (인덱스 에러)/ 왜인진 모르겠지만 맨 마지막 인덱스는 안 나온다.-># 해결 
-OX =[] # db 저장용 
+wrong_ox = list() #db 저장용 
 # html 렌더링
 @app.route('/wrong_img',  methods=['POST','GET'])
 def wrong_img():
     # OX list에 결과값 저장
-    global OX
+    global wrong_ox
     if request.method == 'POST':
         image = str(request.form['button'])
         if 'X' in image:
-            OX.append('정답')
-        else: OX.append('오답')
+            wrong_ox.append('정답')
+        else: wrong_ox.append('오답')
     # 이미지 불러오기
     global count
     global test_class
@@ -365,9 +365,9 @@ def end():
     
     # db 에 정보 저장
     game = '틀린그림찾기'
-    OX1 = OX[0]
-    OX2 = OX[1]
-    OX3 = OX[2]
+    OX1 = wrong_ox[0]
+    OX2 = wrong_ox[1]
+    OX3 = wrong_ox[2]
     
     cursor.execute("""
         INSERT INTO wrong_test (game, OX1,OX2,OX3) VALUES (?,?,?,?)          
