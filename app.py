@@ -144,54 +144,51 @@ def image_similarity():
 def stroop():
     return render_template('2nd_test.html')
 
+OX = []
+
 @app.route("/save",methods=['POST']) #flask 웹 페이지 경로
 def save(): # 경로에서 실행될 기능 선언
     correct = []
     my_correct=[]
-    OX = []
+    global OX
     result = request.form['result']
     correct.append(result[0:2])  # 문자열 슬라이싱해서 들고와야한다. 
     my_correct.append(result[3:5])
     OX.append(result[6:8])
-    print(correct)
-    print(my_correct)
-    print(OX)
-    
+
     # # 확인용
     # check = request.form['check']
     # print(check)
-    
-    # DB 생성 / 이미 있으면 나중에 주석처리하기.
-    # isolation_level = None (auto commit)
-    conn = sqlite3.connect('ijm.db', isolation_level=None)
-    # 커서
-    cursor = conn.cursor()
-    # 테이블 생성(데이터 타입 = TEST, NUMERIC, INTEGER, REAL, BLOB(image) 등)
-    # 필드명(ex. name) -> 데이터 타입(ex. text) 순서로 입력 
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS stroop (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        game text,
-        correct text,
-        my_correct text,
-        OX text)""")
+    if len(OX) >= 8:
+        # DB 생성 / 이미 있으면 나중에 주석처리하기.
+        # isolation_level = None (auto commit)
+        conn = sqlite3.connect('ijm.db', isolation_level=None)
+        # 커서
+        cursor = conn.cursor()
+        # 테이블 생성(데이터 타입 = TEST, NUMERIC, INTEGER, REAL, BLOB(image) 등)
+        # 필드명(ex. name) -> 데이터 타입(ex. text) 순서로 입력 
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS stroop (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            game text,
+            correct text,
+            my_correct text,
+            OX text)""")
 
-    # db 에 정보 저장
-    game = '스트루프'
-    correct = correct[0]
-    my_correct = my_correct[0]
-    OX = OX[0]
-    print('111111111')
-    cursor.execute("""
-        INSERT INTO stroop (game, correct,my_correct, OX) VALUES (?,?,?,?)          
-        """, (game, correct,my_correct, OX)
-        )
-    print('222222222')
+        # db 에 정보 저장
+        game = '스트루프'
+        print('111111111')
+        cursor.execute("""
+            INSERT INTO stroop (game, correct,my_correct, OX) VALUES (?,?,?,?)          
+            """, (game, OX[0], OX[1], OX[2], OX[3], OX[4], OX[5], OX[6], OX[7])
+            )
+        print('222222222')
 
-    conn.commit()
-    cursor.close()
-    conn.close()    
-    return render_template('2nd_test.html')
+        conn.commit()
+        cursor.close()
+        conn.close()
+        OX = []
+        return render_template('2nd_test.html')
 
 ################### 3번째 게임 : 글->그림 ###################
 @app.route('/text_to_img')
