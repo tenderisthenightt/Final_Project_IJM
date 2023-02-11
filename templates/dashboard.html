@@ -86,18 +86,7 @@
                       <li><a href="https://www.bokjiro.go.kr/">복지로</a></li>
                     </ul>
                   </li>
-                  <li><a href="#" onClick="captureCurrentPage();"><i class="fa fa-download"></i> Download <span class="fa fa-chevron-down"></span></a></li>
-                  <script>
-                    function captureCurrentPage() {
-
-                      html2canvas(document.body).then(function(canvas) {
-                        var link = document.createElement("a");
-                        link.download = "screenshot.png";
-                        link.href = canvas.toDataURL("image/png");
-                        link.click();
-                      });
-                    }
-</script>
+                
                 
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -116,6 +105,18 @@
                 <ul class="nav side-menu">
                   <li><a href="{{ url_for('static', filename='download/brain_training.pdf') }}" download>중앙치매센터_두근두근 뇌운동</a></li>
                   <li><a href="{{ url_for('static', filename='download/K-MoCA.pdf') }}" download>K-MoCA_인지검사지</a></li>
+                  <li><a href="#" onClick="captureCurrentPage();"><i class="fa fa-download"></i> 검사결과 다운로드 <span class="fa fa-chevron-down"></span></a></li>
+                  <script>
+                    function captureCurrentPage() {
+
+                      html2canvas(document.body).then(function(canvas) {
+                        var link = document.createElement("a");
+                        link.download = "screenshot.png";
+                        link.href = canvas.toDataURL("image/png");
+                        link.click();
+                      });
+                    }
+</script>
 
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
