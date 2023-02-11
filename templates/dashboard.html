@@ -27,6 +27,15 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ url_for('static', filename='gentelella/build/css/custom.min.css') }}" rel = 'stylesheet'>
+  
+      <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel = 'stylesheet'>
+
+  <!--stylesheet-->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet" >
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" rel = 'stylesheet'>
+  
   </head>
 
   <body class="nav-md">
@@ -61,10 +70,23 @@
                 <ul class="nav side-menu">
                   <li><a href="/" onClick="window.location.href='/'"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a></li>
                   </li>
-                  
+                  <li><a><i class="fa fa-table"></i> About <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/abouttest" onClick="window.location.href='/abouttest'"><i class="fa fa-home"></i> MCI 검사란? <span class="fa fa-chevron-down"></span></a></li>
+                      <li><a href="/aboutus" onClick="window.location.href='/aboutus'"><i class="fa fa-home"></i> 만든 사람들 <span class="fa fa-chevron-down"></span></a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-desktop"></i> Link fou U <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="https://www.mentalhealth.go.kr/">국가정신건강정보포털</a></li>
+                      <li><a href="https://www.hira.or.kr/">건강보험심사평가원</a></li>
+                      <li><a href="https://www.nid.or.kr/">보건복지부 중앙치매센터</a></li>
+                      <li><a href="https://www.dementia.or.kr/">대한치매학회</a></li>
+                      <li><a href="https://www.hidoc.co.kr/">하이닥</a></li>
+                      <li><a href="https://www.bokjiro.go.kr/">복지로</a></li>
+                    </ul>
+                  </li>
                   <li><a href="#" onClick="captureCurrentPage();"><i class="fa fa-download"></i> Download <span class="fa fa-chevron-down"></span></a></li>
-                  <li><a href="{{ url_for('static', filename='download/brain_training.pdf') }}" download>중앙치매센터_두근두근 뇌운동</a></li>
-                  <li><a href="{{ url_for('static', filename='download/K-MoCA.pdf') }}" download>K-MoCA_인지검사지</a></li>
                   <script>
                     function captureCurrentPage() {
 
@@ -76,25 +98,7 @@
                       });
                     }
 </script>
-
-
-                    
-                  <li><a><i class="fa fa-desktop"></i> Link fou U <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="typography.html">국가정신건강정보포털</a></li>
-                      <li><a href="icons.html">건강보험심사평가원</a></li>
-                      <li><a href="general_elements.html">보건복지부 중앙치매센터</a></li>
-                      <li><a href="media_gallery.html">대한치매학회</a></li>
-                      <li><a href="glyphicons.html">하이닥</a></li>
-                      <li><a href="widgets.html">복지로</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> About <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="/abouttest" onClick="window.location.href='/abouttest'"><i class="fa fa-home"></i> About test <span class="fa fa-chevron-down"></span></a></li>
-                      <li><a href="/aboutus" onClick="window.location.href='/aboutus'"><i class="fa fa-home"></i> About us <span class="fa fa-chevron-down"></span></a></li>
-                    </ul>
-                  </li>
+                
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="chartjs.html">Chart JS</a></li>
@@ -104,53 +108,15 @@
                       <li><a href="other_charts.html">Other Charts</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                    </ul>
-                  </li>
+                  
                 </ul>
               </div>
               <div class="menu_section">
                 <h3>Download</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="page_403.html">403 Error</a></li>
-                      <li><a href="page_404.html">404 Error</a></li>
-                      <li><a href="page_500.html">500 Error</a></li>
-                      <li><a href="plain_page.html">Plain Page</a></li>
-                      <li><a href="login.html">Login Page</a></li>
-                      <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="#level1_1">Level One</a>
-                        <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Level Two</a>
-                            </li>
-                            <li><a href="#level2_1">Level Two</a>
-                            </li>
-                            <li><a href="#level2_2">Level Two</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a href="#level1_2">Level One</a>
-                        </li>
-                    </ul>
-                  </li>                  
+                  <li><a href="{{ url_for('static', filename='download/brain_training.pdf') }}" download>중앙치매센터_두근두근 뇌운동</a></li>
+                  <li><a href="{{ url_for('static', filename='download/K-MoCA.pdf') }}" download>K-MoCA_인지검사지</a></li>
+
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
               </div>
@@ -319,28 +285,28 @@
 
                 <div class="row x_title">
                   <div class="col-md-6">
-                    <h3>Network Activities <small>Graph title sub-title</small></h3>
+                    <h3>당신의 결과 <small>개발진들의 평균점수 대비 oo의 점수</small></h3>
                   </div>
                   <div class="col-md-6">
                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                       <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                      
                     </div>
                   </div>
                 </div>
 
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <div id="chart_plot_01" class="demo-placeholder"></div>
+                <div><img src="{{ url_for('static', filename = 'sample1.png')}}" alt="Image" class="img-fluid"></div>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
                   <div class="x_title">
-                    <h2>Top Campaign Performance</h2>
+                    <h2>Score</h2>
                     <div class="clearfix"></div>
                   </div>
 
                   <div class="col-md-12 col-sm-12 col-xs-6">
                     <div>
-                      <p>Facebook Campaign</p>
+                      <p>비슷한 그림 그리기 (총 1 문제)</p>
                       <div class="">
                         <div class="progress progress_sm" style="width: 76%;">
                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
@@ -348,7 +314,7 @@
                       </div>
                     </div>
                     <div>
-                      <p>Twitter Campaign</p>
+                      <p>글자 색 맞히기 (총 8 문제)</p>
                       <div class="">
                         <div class="progress progress_sm" style="width: 76%;">
                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
@@ -358,7 +324,7 @@
                   </div>
                   <div class="col-md-12 col-sm-12 col-xs-6">
                     <div>
-                      <p>Conventional Media</p>
+                      <p>제시 단어 그리기 (총 1 문제)</p>
                       <div class="">
                         <div class="progress progress_sm" style="width: 76%;">
                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
@@ -366,7 +332,23 @@
                       </div>
                     </div>
                     <div>
-                      <p>Bill boards</p>
+                      <p>다른 그림 찾기 (총 3 문제)</p>
+                      <div class="">
+                        <div class="progress progress_sm" style="width: 76%;">
+                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <p>숫자 순서 맞히기 (총 9 문제)</p>
+                      <div class="">
+                        <div class="progress progress_sm" style="width: 76%;">
+                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <p>문장 따라 말하기 (n / 1)</p>
                       <div class="">
                         <div class="progress progress_sm" style="width: 76%;">
                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>

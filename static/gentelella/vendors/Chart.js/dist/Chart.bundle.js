@@ -11376,7 +11376,7 @@ module.exports = function(Chart) {
 		xPadding: 6,
 		yAlign : 'center',
 		xAlign : 'center',
-		caretSize: 5,
+		chart_plotSize: 5,
 		cornerRadius: 6,
 		multiKeyBackground: '#fff',
 		callbacks: {
