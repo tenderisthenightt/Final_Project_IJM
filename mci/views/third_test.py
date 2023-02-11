@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session
 import sqlite3
 
 bp = Blueprint('third', __name__, url_prefix='/')
 
 # 3rd test
-import pandas
 import torch
 import sqlite3
 import PIL
@@ -87,10 +86,11 @@ def predict():
     game = '글->그림'
     point = float(conf.confidence)
     OX = OX[0]
+    guest = session['guest']
 
     cursor.execute("""
-        INSERT INTO text_write (game, point, OX) VALUES (?,?,?)          
-        """, (game, point, OX)
+        INSERT INTO text_write (game, point, OX, session) VALUES (?,?,?,?)          
+        """, (game, point, OX, guest)
         )
 
     conn.commit()

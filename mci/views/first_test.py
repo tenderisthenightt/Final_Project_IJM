@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session
 
 bp = Blueprint('first', __name__, url_prefix='/')
 
@@ -81,19 +81,23 @@ def image_similarity():
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         game text,
         point float,
-        OX text)""")
+        OX text
+        session integer)""")
 
     # db 에 정보 저장
     game = '유사도 검사'
     point = float(cosine_similarity)
     OX = OX[0]
+    guest = session['guest']
 
     cursor.execute("""
-        INSERT INTO sim (game, point, OX) VALUES (?,?,?)          
-        """, (game, point, OX)
+        INSERT INTO sim (game, point, OX, session) VALUES (?,?,?,?)          
+        """, (game, point, OX, guest)
         )
 
     conn.commit()
     cursor.close()
-    conn.close()    
+    conn.close()
+    guest = session['guest']
+    print(guest)
     return render_template('2nd_test.html')
