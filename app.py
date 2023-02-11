@@ -629,7 +629,7 @@ def STT():
 
 @app.route('/result')
 def result():
-    return render_template('dashboard.html')
+    return render_template('dashboardd.html')
 
 
 @app.route('/aboutus')

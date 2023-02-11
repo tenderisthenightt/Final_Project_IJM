@@ -27,15 +27,9 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ url_for('static', filename='gentelella/build/css/custom.min.css') }}" rel = 'stylesheet'>
-  
-      <!-- Template Main CSS File -->
-  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel = 'stylesheet'>
-
-  <!--stylesheet-->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet" >
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" rel = 'stylesheet'>
-  
+    
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel = 'stylesheet'>
   </head>
 
   <body class="nav-md">
@@ -52,7 +46,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="{{ url_for('static', filename = 'face/heehyun.png')}}" alt="Image" class="img-fluid" class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Have a,</span>
@@ -61,7 +55,7 @@
             </div>
             <!-- /menu profile quick info -->
 
-            <br />
+            <br/>
 
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
@@ -103,22 +97,9 @@
               <div class="menu_section">
                 <h3>Download</h3>
                 <ul class="nav side-menu">
-                  <li><a href="{{ url_for('static', filename='download/brain_training.pdf') }}" download>중앙치매센터_두근두근 뇌운동</a></li>
-                  <li><a href="{{ url_for('static', filename='download/K-MoCA.pdf') }}" download>K-MoCA_인지검사지</a></li>
-                  <li><a href="#" onClick="captureCurrentPage();"><i class="fa fa-download"></i> 검사결과 다운로드 <span class="fa fa-chevron-down"></span></a></li>
-                  <script>
-                    function captureCurrentPage() {
-
-                      html2canvas(document.body).then(function(canvas) {
-                        var link = document.createElement("a");
-                        link.download = "screenshot.png";
-                        link.href = canvas.toDataURL("image/png");
-                        link.click();
-                      });
-                    }
-</script>
-
-                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+                  <li><a href="{{ url_for('static', filename='download/brain_training.pdf') }}" download><i class="fa fa-download"></i>중앙치매센터_두근두근 뇌운동</a></li>
+                  <li><a href="{{ url_for('static', filename='download/K-MoCA.pdf') }}" download><i class="fa fa-download"></i>K-MoCA_인지검사지</a></li>
+                  <li><a href="#" onClick="generatePDF();"><i class="fa fa-download"></i> 결과 다운로드<span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
               </div>
 
@@ -286,26 +267,22 @@
 
                 <div class="row x_title">
                   <div class="col-md-6">
-                    <h3>당신의 결과 <small>개발진들의 평균점수 대비 oo의 점수</small></h3>
+                    <h3>검사결과 <small>개발진들의 평균점수 대비 당신의 점수</small></h3>
                   </div>
                   <div class="col-md-6">
                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      
-                    </div>
                   </div>
                 </div>
 
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                <div><img src="{{ url_for('static', filename = 'sample1.png')}}" alt="Image" class="img-fluid"></div>
+                  <div><img src="{{ url_for('static', filename = 'sample2.png')}}" alt="Image" class="img-fluid"></div>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
                   <div class="x_title">
-                    <h2>Score</h2>
-                    <div class="clearfix"></div>
+                      <h2>Score</h2>
+                      <div class="clearfix"></div>
                   </div>
 
-                  <div class="col-md-12 col-sm-12 col-xs-6">
                     <div>
                       <p>비슷한 그림 그리기 (총 1 문제)</p>
                       <div class="">
@@ -322,8 +299,6 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-md-12 col-sm-12 col-xs-6">
                     <div>
                       <p>제시 단어 그리기 (총 1 문제)</p>
                       <div class="">
@@ -349,7 +324,7 @@
                       </div>
                     </div>
                     <div>
-                      <p>문장 따라 말하기 (n / 1)</p>
+                      <p>문장 따라 말하기 (총 1 문제)</p>
                       <div class="">
                         <div class="progress progress_sm" style="width: 76%;">
                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
@@ -373,7 +348,7 @@
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
-                  <h2>App Versions</h2>
+                  <h2>경도인지저하 증가율</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
