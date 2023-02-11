@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import sqlite3 as sql
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' #tensorflow warning 끄는 용
+import ssl
 
 # 1st test
 import keras.applications as kapp
@@ -648,5 +649,5 @@ if __name__ == '__main__':
     # https://flask.palletsprojects.com/en/2.0.x/api/#flask.Flask.run
     # https://snacky.tistory.com/9
      # host주소와 port number 선언
-    app.run(host='0.0.0.0', debug=True)  
+    app.run(host='0.0.0.0', ssl_context='adhoc')  
     
