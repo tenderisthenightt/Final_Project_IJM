@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 import sqlite3
 
 bp = Blueprint('fourth', __name__, url_prefix='/')
@@ -23,8 +23,8 @@ def wrong_img():
     if request.method == 'POST':
         image = str(request.form['button'])
         if 'X' in image:
-            wrong_ox.append('정답')
-        else: wrong_ox.append('오답')
+            wrong_ox.append(1)
+        else: wrong_ox.append(0)
     # 이미지 불러오기
     global wrong_image_count
     global test_class
@@ -80,22 +80,23 @@ def end():
     # 테이블 생성(데이터 타입 = TEST, NUMERIC, INTEGER, REAL, BLOB(image) 등)
     # 필드명(ex. name) -> 데이터 타입(ex. text) 순서로 입력 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS wrong_test (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    CREATE TABLE IF NOT EXISTS Wrong_Image (
+        session TEXT PRIMARY KEY NOT NULL,
         game text,
-        OX1 text,
-        OX2 text,
-        OX3 text)""")
+        OX1 integer,
+        OX2 integer,
+        OX3 integer)""")
     
     # db 에 정보 저장
-    game = '틀린그림찾기'
+    game = 'Wrong_Image'
     OX1 = wrong_ox[0]
     OX2 = wrong_ox[1]
     OX3 = wrong_ox[2]
+    guest = str(session['guest'])
     
     cursor.execute("""
-        INSERT INTO wrong_test (game, OX1,OX2,OX3) VALUES (?,?,?,?)          
-        """, (game, OX1,OX2,OX3)
+        INSERT INTO Wrong_Image (session, game, OX1,OX2,OX3) VALUES (?,?,?,?,?)          
+        """, (guest, game, OX1,OX2,OX3)
         )
     conn.commit()
     cursor.close()

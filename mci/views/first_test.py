@@ -39,10 +39,11 @@ def image_similarity():
     print('1111111111111111')
     # 이미지 받기(blob)
     if request.method == 'POST':
+        guest = str(session['guest'])
         image = request.files["image"]
         # Save image_binary to a file or a variable
-        image.save('simimage.png')
-        image = 'simimage.png'
+        img_path = 'drawing/sim/' + guest + '.png'
+        image.save(img_path)
         print('222222222222222222')
         global anch
         print(anch)
@@ -55,7 +56,7 @@ def image_similarity():
     
 
     features1 = get_image_feature(p_path)
-    features2 = get_image_feature(image)
+    features2 = get_image_feature(img_path)
     print('44444444444444')
     cosine_similarity = np.dot(features1, features2) / (np.linalg.norm(features1) * np.linalg.norm(features2))
     print(cosine_similarity)
@@ -64,8 +65,8 @@ def image_similarity():
     # db 저장하기
     OX = []
     if cosine_similarity >= sim:
-        OX.append('정답')
-    else: OX.append('오답') 
+        OX.append(1)
+    else: OX.append(0) 
     print(OX)
    
 
@@ -77,22 +78,21 @@ def image_similarity():
     # 테이블 생성(데이터 타입 = TEST, NUMERIC, INTEGER, REAL, BLOB(image) 등)
     # 필드명(ex. name) -> 데이터 타입(ex. text) 순서로 입력 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS sim (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    CREATE TABLE IF NOT EXISTS Sim_Test (
+        session TEXT PRIMARY KEY NOT NULL,
         game text,
         point float,
-        OX text
-        session integer)""")
+        OX integer
+        )""")
 
     # db 에 정보 저장
-    game = '유사도 검사'
+    game = 'Sim_Test'
     point = float(cosine_similarity)
     OX = OX[0]
-    guest = session['guest']
 
     cursor.execute("""
-        INSERT INTO sim (game, point, OX, session) VALUES (?,?,?,?)          
-        """, (game, point, OX, guest)
+        INSERT INTO Sim_Test (session, game, point, OX) VALUES (?,?,?,?)          
+        """, (guest, game, point, OX)
         )
 
     conn.commit()

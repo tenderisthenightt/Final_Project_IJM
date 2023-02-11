@@ -23,7 +23,9 @@ def predict():
     if request.method == 'POST':
         image = request.files["image"]
         # Save image_binary to a file or a variable
-        image.save('image.png')
+        guest = str(session['guest'])
+        img_path = 'drawing/txt_to_img/' + guest + '.png'
+        image.save(img_path)
 
 
 
@@ -43,7 +45,7 @@ def predict():
 
     # Image
     print('asdadasdasdasdas')
-    img = PIL.Image.open('image.png')
+    img = PIL.Image.open(img_path)
     print('ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅁㄴㅇㅁㄴㅇㅁㄴㅇ')
     ########## 이 사진을 어떻게 가지고 올지에 대해서 알아봐야한다. !!
     global yolo_model
@@ -63,8 +65,9 @@ def predict():
     # 오답 여부
     OX = []
     if conf.name[0] == 'rabbit':
-        OX.append('정답')
-    else : OX.append('오답')
+        OX.append(1)
+    else:
+        OX.append(0)
     print(OX)
     
 
@@ -76,21 +79,20 @@ def predict():
     # 테이블 생성(데이터 타입 = TEST, NUMERIC, INTEGER, REAL, BLOB(image) 등)
     # 필드명(ex. name) -> 데이터 타입(ex. text) 순서로 입력 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS text_write (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    CREATE TABLE IF NOT EXISTS Txt_to_Img (
+        session TEXT PRIMARY KEY NOT NULL,
         game text,
         point float,
-        OX text)""")
+        OX integer)""")
 
     # db 에 정보 저장
-    game = '글->그림'
+    game = 'Txt_to_Img'
     point = float(conf.confidence)
     OX = OX[0]
-    guest = session['guest']
 
     cursor.execute("""
-        INSERT INTO text_write (game, point, OX, session) VALUES (?,?,?,?)          
-        """, (game, point, OX, guest)
+        INSERT INTO Txt_to_Img (session, game, point, OX) VALUES (?,?,?,?)          
+        """, (guest, game, point, OX)
         )
 
     conn.commit()

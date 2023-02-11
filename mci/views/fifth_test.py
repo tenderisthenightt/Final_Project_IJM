@@ -1,17 +1,12 @@
-from flask import Blueprint, render_template
-import sqlite3
+from flask import Blueprint, render_template, session
 
 bp = Blueprint('fifth', __name__, url_prefix='/')
 
 # 5th test
-import base64
-import requests
-from time import sleep
-import urllib3
-import json
-import os, pyscreenshot, random, string
+import os, pyscreenshot
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 import easyocr
+import sqlite3
 
 @bp.route('/pygame')
 def pygame():
@@ -36,11 +31,12 @@ def get_screenshot():
         return level, score
 
     # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
+    guest = str(session['guest'])
     im = pyscreenshot.grab()
-    random_id = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(32)])
-    file_name = 'mci/static/5/img/{}.png'.format(random_id)
+    file_name = 'drawing/pygame/{}.png'.format(guest)
     im.save(file_name)
     reader = easyocr.Reader(['ko', 'en'])
+    game = 'Memory_Test'
     
     with open(file_name,'rb') as pf:
         img = pf.read()
@@ -49,14 +45,20 @@ def get_screenshot():
             if res[1][0:10] == 'Your level':    
                 level = res[1][-1]
                 result = get_score(int(level))
+            else:
+                level=1
+                result=0
     
     # 텍스트로 추출한 결과를 DB에 저장
     conn = sqlite3.connect('mci/ijm.db', isolation_level=None)
     cursor = conn.cursor()
     cursor.execute(
-        """CREATE TABLE IF NOT EXISTS remember (level TEXT, score TEXT)""")
-    cursor.execute("""INSERT INTO remember(level, score) 
-                    VALUES(?, ?)""", (result[0], result[1]))
+        """CREATE TABLE IF NOT EXISTS Memory_Test (session TEXT PRIMARY KEY NOT NULL,
+        game TEXT,
+        level integer,
+        score integer)""")
+    cursor.execute("""INSERT INTO Memory_Test(session, game, level, score) 
+                    VALUES(?, ?, ?, ?)""", (guest, game, level, result))
     conn.commit()
     cursor.close()
     os.remove(file_name)

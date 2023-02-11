@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, session
 import sqlite3 as sql
 from time import sleep
 import urllib3
@@ -7,27 +7,16 @@ import base64
 
 bp = Blueprint('sixth', __name__, url_prefix='/')
 
-DATABASE_URI = 'mci/sttdb.db'
+DATABASE_URI = 'mci/ijm.db'
 
-conn = sql.connect(DATABASE_URI, isolation_level=None)
-cur = conn.cursor()
-
-cur.execute("SELECT target FROM STT")
-db_text = str(cur.fetchmany(size=1))
-
-# 경로와 정답Text만 추출하기 위한 처리
-db_List = db_text.split("'")
-
-global sound_target
-sound_target = db_List[1] # 정답Text
+sound_target = '강아지가 방에 들어오면 고양이는 의자 밑에 숨는다' # 정답Text
 print(sound_target)
-
-dic = {'1' : sound_target} # 정답 Text
 
 
 @bp.route('/sound')
 def sound():
-    return render_template('6th_test.html', target=dic['1'])
+    global sound_target
+    return render_template('6th_test.html', target=sound_target)
 
 @bp.route('/STT', methods=['POST', 'GET'])
 def STT():
@@ -45,6 +34,7 @@ def STT():
     #---------------------------------------------------------------------------
     print('여기까지는 되는거?')
     if request.method == 'POST':
+        global sound_target
         openApiURL = "http://aiopen.etri.re.kr:8000/WiseASR/Recognition"
         print('5555555')
         accessKey = "f0f9fd15-daef-4655-b516-d7a9711c696a" 
@@ -167,29 +157,41 @@ def STT():
         
         conn = sql.connect(DATABASE_URI, isolation_level=None)
         cur = conn.cursor()
+        cur.execute(
+        """CREATE TABLE IF NOT EXISTS STT (session TEXT PRIMARY KEY NOT NULL,
+        game TEXT,
+        target TEXT,
+        user_sound TEXT,
+        ck TEXT,
+        score integer)""")
+        guest = str(session['guest'])
+        game = 'STT'
+        
 
-        cur.execute("UPDATE STT SET user_sound = '%s' WHERE id = '%s'" %(sentence1, 1))
-        cur.execute("UPDATE STT SET ck = '%s' WHERE id = '%s'" %(String, 1))
-        cur.execute("UPDATE STT SET score = '%s' WHERE id = '%s'" %(Score, 1))
+
+        cur.execute("""
+        INSERT INTO STT (session, game, target, user_sound, ck, score) VALUES (?,?,?,?,?,?)          
+        """, (guest, game, sound_target, sentence1, String, Score)
+        )
         
         conn.commit()
         cur.close()
         
         #-----------------------------------------------------------------------------
         
-        conn = sql.connect(DATABASE_URI, isolation_level=None)
-        cur = conn.cursor()
+        # conn = sql.connect(DATABASE_URI, isolation_level=None)
+        # cur = conn.cursor()
                 
-        cur.execute("SELECT * FROM STT")
-        STT_Data = str(cur.fetchmany(size=1))
-        STT_Data = STT_Data.split("'")
-        cur.close()
+        # cur.execute("SELECT * FROM STT")
+        # STT_Data = str(cur.fetchmany(size=1))
+        # STT_Data = STT_Data.split("'")
+        # cur.close()
         
-        stt_id = STT_Data[1]
-        stt_target = STT_Data[3]
-        stt_user_sound = STT_Data[5]
-        stt_ck = STT_Data[7]
-        stt_score = STT_Data[9]
+        # stt_id = STT_Data[1]
+        # stt_target = STT_Data[3]
+        # stt_user_sound = STT_Data[5]
+        # stt_ck = STT_Data[7]
+        # stt_score = STT_Data[9]
         
         #                                             정답문장          TTS        체크 결과
     # return render_template('6th_test.html', target = sentence2, sound = sentence1, ck=String)
