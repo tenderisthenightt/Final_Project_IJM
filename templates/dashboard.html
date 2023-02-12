@@ -374,7 +374,7 @@
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
-                  <h2>경도인지장애 진료환자 증가폭</h2>
+                  <h2>경도인지장애 진료환자 증가폭 <h5>(단위:명)</h5></h2>
                   <ul class="nav navbar-right panel_toolbox"></ul>
                   <div class="clearfix"></div>
                 </div>
@@ -469,9 +469,11 @@
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320 overflow_hidden">
                 <div class="x_title">
-                  <h2>Device Usage</h2>
+                  <h2>하루에 기억을 잊어본 경험이 몇번 정도 있나요?</h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li></li>
+                    <li>
+                      <h5>국민 34.5%, "하루 세번 이상 깜빡해"</h5>
+                    </li>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -479,14 +481,14 @@
                   <table class="" style="width:100%">
                     <tr>
                       <th style="width:37%;">
-                        <p>Top 5</p>
+                        <p></p>
                       </th>
                       <th>
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                          <p class="">Device</p>
+                          <p class="">4가지 유형</p>
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                          <p class="">Progress</p>
+                          <p class="">비율</p>
                         </div>
                       </th>
                     </tr>
@@ -498,33 +500,27 @@
                         <table class="tile_info">
                           <tr>
                             <td>
-                              <p><i class="fa fa-square blue"></i>IOS </p>
+                              <p><i class="fa fa-square blue"></i>2회 미만 </p>
                             </td>
-                            <td>30%</td>
+                            <td>55.5%</td>
                           </tr>
                           <tr>
                             <td>
-                              <p><i class="fa fa-square green"></i>Android </p>
+                              <p><i class="fa fa-square green"></i>3-5회</p>
                             </td>
-                            <td>10%</td>
+                            <td>34.5%</td>
                           </tr>
                           <tr>
                             <td>
-                              <p><i class="fa fa-square purple"></i>Blackberry </p>
+                              <p><i class="fa fa-square purple"></i>6-10회</p>
                             </td>
-                            <td>20%</td>
+                            <td>5.5%</td>
                           </tr>
                           <tr>
                             <td>
-                              <p><i class="fa fa-square aero"></i>Symbian </p>
+                              <p><i class="fa fa-square aero"></i>10회 이상</p>
                             </td>
-                            <td>15%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square red"></i>Others </p>
-                            </td>
-                            <td>30%</td>
+                            <td>4.5%</td>
                           </tr>
                         </table>
                       </td>
@@ -914,7 +910,8 @@
         <!-- /footer content -->
       </div>
     </div>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <!-- jQuery -->
     <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
