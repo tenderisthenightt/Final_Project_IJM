@@ -42,7 +42,7 @@ def image_similarity():
         guest = str(session['guest'])
         image = request.files["image"]
         # Save image_binary to a file or a variable
-        img_path = 'drawing/sim/' + guest + '.png'
+        img_path = 'mci/static/drawing/sim/' + guest + '.png'
         image.save(img_path)
         print('222222222222222222')
         global anch

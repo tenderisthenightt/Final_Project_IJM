@@ -24,7 +24,7 @@ def predict():
         image = request.files["image"]
         # Save image_binary to a file or a variable
         guest = str(session['guest'])
-        img_path = 'drawing/txt_to_img/' + guest + '.png'
+        img_path = 'mci/static/drawing/txt_to_img/' + guest + '.png'
         image.save(img_path)
 
 
