@@ -85,84 +85,21 @@
 
     <!--모델-->
       <div>
-        <img id="image" src="{{ url_for('static', filename='2/img/001.png') }}" class="img-fluid" alt="Square Image">
+        <img id="image" src="{{h_path}}" class="img-fluid" alt="Square Image">
         <!-- <img id="image" src="static/img/001.png" class="img-fluid" alt="Square Image"> -->
       </div>
-    </div>
-    <div class="form-group">
-      <input id="input" type="text" class="form-control" placeholder="여기에 입력">
-      <button id="submit" class="btn btn-primary" ;>제출</button>
-    </div>
-    </div>
-    <script>
-      //let content = "반응 시간,파일 이름,정답,입력,정오\n";
-      let prevTime = Date.now();
-      let index = 0;
-      //const correctAnswers = ['1', '2', '3', '4', '5', '6', '7', '8', '9']; // 확인용
-      const correctAnswers = ['빨강', '파랑', '노랑', '빨강', '파랑', '검정', '노랑', '빨강', '검정'];
-      document.getElementById('submit').addEventListener('click', function () { // submit을 클리하면 함수 실행
-          let value = document.getElementById('input').value;
-          //let filename = `1/${(index + 1).toString().padStart(3, '0')}.png`;
-
-          //content += `${(Date.now() - prevTime)/1000},${filename},${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}\n`; 
-          //content +    반응시간                        파일 이름   정답                      입력      정오          
-          document.getElementById('input').value = '';
-          prevTime = Date.now();
-          
-
-          //지영
-          content = `${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}`; // 위의 content 중에서 필요한 것 만 갖고와서 다시 변수만들기
-          index++;//index content 뒤에 둬야 1씩추가됨.. 아니면 2번째부터 시작
-          let formData = new FormData(); // 새로운 변수 생성
-          formData.append("result", content); //변수에 저장
-          let check = new FormData(); // 새로운 변수 생성
-          check.append("check", correctAnswers); //변수에 저장
-          let xhr = new XMLHttpRequest();
-          xhr.open("POST", "/save", true); // post 방식으로 / url ->save  보낸다.
-          xhr.send(formData); // formData 변수를 보낸다.
-       
-          if (index >= correctAnswers.length) {
             
-            return;
-        }
-      
-       
 
-          document.getElementById('image').src = `static/2/img/${(index + 1).toString().padStart(3, '0')}.png`;
-          // document.getElementById('image').src = `1/001.png`
-          // document.getElementById('image').src = `1/002.png`
-          // document.getElementById('image').src = `1/003.png`
-          // document.getElementById('image').src = `1/004.png`
-          // document.getElementById('image').src = `1/005.png`
-          // document.getElementById('image').src = `1/006.png`
-          // document.getElementById('image').src = `1/007.png`
-          // document.getElementById('image').src = `1/008.png`
-          // document.getElementById('image').src = `1/009.png`;
-
-          // document.getElementById('image').src = `static/img/1/001.png`;
-          // document.getElementById('image').src = `static/img/1/002.png`;
-          // document.getElementById('image').src = `static/img/1/003.png`;
-          // document.getElementById('image').src = `static/img/1/004.png`;
-          // document.getElementById('image').src = `static/img/1/005.png`;
-          // document.getElementById('image').src = `static/img/1/006.png`;
-          // document.getElementById('image').src = `static/img/1/007.png`;
-          // document.getElementById('image').src = `static/img/1/008.png`;
-          // document.getElementById('image').src = `static/img/1/009.png`;
-      })
-    
-    var input = document.getElementById("input");
-    input.addEventListener("keyup", function (event) {
-      if (event.keyCode === 13) {
-        event.preventDefault();
-        document.getElementById("submit").click();
-      }
-  });
-  // 엔터 submit기능 
-  </script>
-  <!--모델 끝-->
 
 
 </div>
+<br>
+<form action="/save" method="post">
+  <input type="submit" value="빨강" name="answer" onclick="submitForm(this.value)">
+  <input type="submit" value="검정" name="answer" onclick="submitForm(this.value)">
+  <input type="submit" value="노랑" name="answer" onclick="submitForm(this.value)">
+  <input type="submit" value="파랑" name="answer" onclick="submitForm(this.value)">
+</form>
 <h2>
   <div>
     <center>
@@ -217,5 +154,11 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+<script>
+  function submitForm(value) {
+    document.forms[0].elements['answer'].value = value;
+    document.forms[0].submit();
+  }
+  </script>
 </body>
 </html>
