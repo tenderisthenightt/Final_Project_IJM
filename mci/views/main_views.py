@@ -33,8 +33,10 @@ def intro():
 
 @bp.route('/aboutus')
 def aboutus():
+    session.clear()
     return render_template('aboutus.html')
 
 @bp.route('/abouttest')
 def abouttest():
+    session.clear()
     return render_template('abouttest.html')
