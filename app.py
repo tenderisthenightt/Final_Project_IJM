@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, flash, g, redirect, url_for, 
 from werkzeug.utils import secure_filename
 import sqlite3 as sql
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' #tensorflow warning 끄는 용
+import ssl
 
 # 1st test
 import keras.applications as kapp
