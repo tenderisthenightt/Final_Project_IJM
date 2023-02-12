@@ -631,7 +631,7 @@ def STT():
 
 @app.route('/result')
 def result():
-    return render_template('dashboardd.html')
+    return render_template('dashboard.html')
 
 
 @app.route('/aboutus')
@@ -641,8 +641,6 @@ def aboutus():
 @app.route('/abouttest')
 def abouttest():
     return render_template('abouttest.html')
-
-
 
 
 if __name__ == '__main__':
