@@ -1,5 +1,7 @@
 body {
-    background: linear-gradient(274deg, #e4df4d, #62e286 44%, #77c9ff)
+    background-image: url(/static/images/back7.JPG);
+    background-repeat: no-repeat;
+    background-size: cover
 }
 
 ;

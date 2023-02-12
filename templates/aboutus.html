@@ -43,234 +43,166 @@
 </head>
 
 <body>
-
-<!-- TESTIMONIALS -->
-<div id="image-container">
-  <img src="{{ url_for('static', filename = 'face/hyebin.png')}}" alt="Image">
-  <div id="speech-bubble">
-    <p>우리 팀원들이<br> 궁금한 분들을 위해!</p>
-  </div>
-</div>
-
-<style>
-  #image-container {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    width: 200px;
-    height: 200px;
-    background: transparent;
-  }
-  #image-container img {
-    width: 150px;
-    height: 150px;
-    cursor: pointer;
-  }
-  #speech-bubble {
-    display: none;
-    position: absolute;
-    bottom: 180px;
-    right: 20px;
-    top: -105px;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  #image-container:hover #speech-bubble {
-    display: block;
-  }
-</style>
-<div class="container">
-  <div class="row justify-content-center text-center mb-5">
-    <div class="col-md-6" data-aos="fade-up">
-      <h3 class="section-heading">인지능력 설명 및<br>K-MoCA 소개</h3>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="/" style="width: 100px;">
+        <img src="{{ url_for('static', filename = 'img/logo.png')}}" alt="Image" style="width: 100%;">
+      </a>
+      <h1 style="color: white; margin-left: 10px;">MCI</h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="/">Home</a></li>
+          <li><a href="/intro">Test</a></li>
+          <li class="dropdown"><a href="#">About <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="/abouttest">About test</a></li>
+              <li><a href="/aboutus">About us</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+      </div>
     </div>
-  </div>
-  <div class='container'>
-    <div style="border: px solid; padding :10px; width: 820px; 
-        height: 500px ; border-radius:2em; margin:auto; 
-        padding-top:10px; background-color:#fff ">
-      <div>
-<section id="만든 사람들" class="content-section">
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section class="hero-section" id="hero">
+
+    <div class="wave">
+
+      <svg width="100%" height="355px" viewBox="0 0 1920 355" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Apple-TV" transform="translate(0.000000, -402.000000)" fill="#FFFFFF">
+            <path d="M0,439.134243 C175.04074,464.89273 327.944386,477.771974 458.710937,477.771974 C654.860765,477.771974 870.645295,442.632362 1205.9828,410.192501 C1429.54114,388.565926 1667.54687,411.092417 1920,477.771974 L1920,757 L1017.15166,757 L0,757 L0,439.134243 Z" id="Path"></path>
+          </g>
+        </g>
+      </svg>
+
+    </div>
+
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="block-heading">
-            <h2>About Us</h2><br>
-            <p class="text-muted mb-0"> 파이널 프로젝트 2팀 <br> 인절미(with DATA EDU) </p>
-          </div>
-          <div id="customers-testimonials" class="owl-carousel">
-            <div class="item">
-              <div class="shadow-effect">
-                <img src="{{ url_for('static', filename='images/jungeun.png') }}" class="img-circle" alt="">
-                <p><br>Team manager<br><br>Make 'Stroop Game', find VGG16</p>
-              </div>
-              <div class="testimonial-name">임지영</div>
+      <div class="row align-items-center">
+        <div class="col-12 hero-text-image">
+          <div class="row">
+            <div class="col-lg-8 text-center text-lg-start">
+              <h1 data-aos="fade-right">경도인지저하<br>
+                Mild cognitive impairment</h1>
+              <p class="mb-5" data-aos="fade-right" data-aos-delay="100">현대인의 스트레스와<br>
+                인지기능 저하<br>
+                우리가 시작한 곳입니다</p>
+              <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="#main" class="btn btn-xl smooth-scroll btn-outline-white">설명해주세요</a></p>
             </div>
-            <div class="item">
-              <div class="shadow-effect">
-                <img src="{{ url_for('static', filename='images/hyebin.png') }}" class="img-circle" alt="">
-                <p><br>assistant manager<br><br>ontrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
-              </div>
-              <div class="testimonial-name">김동률</div>
+            <div class="col-md-6" data-aos="fade-left">
+              <img src="{{ url_for('static', filename = 'assets/img/undraw_svg_2.svg')}}" alt="Image" class="img-fluid resized-svg" style="width: 200px; height: 200px; float: left;">
             </div>
-            <div class="item">
-              <div class="shadow-effect">
-                <img src="{{ url_for('static', filename='images/jieun.png') }}" class="img-circle" alt="">
-                <p><br>team member<br><br>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-              </div>
-              <div class="testimonial-name">박혜빈</div>
-            </div>
-            <div class="item">
-              <div class="shadow-effect">
-                <img src="{{ url_for('static', filename='images/jiyoung.png') }}" class="img-circle" alt="">
-                <p><br>team member<br><br>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-              </div>
-              <div class="testimonial-name">박희현</div>
-            </div>
-            <div class="item">
-              <div class="shadow-effect">
-                <img src="{{ url_for('static', filename='images/donghwan.png') }}" class="img-circle" alt="">
-                <p><br>team member<br><br>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-              </div>
-              <div class="testimonial-name">백지은</div>
-            </div>
-            <div class="item">
-              <div class="shadow-effect">
-                <img src="{{ url_for('static', filename='images/huihyun.png') }}" class="img-circle" alt="">
-                <p><br>team member<br><br>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words</p>
-              </div>
-              <div class="testimonial-name">송승우</div>
-            </div>
-            <div class="item">
-              <div class="shadow-effect">
-                <img src="{{ url_for('static', filename='images/dongryul.png') }}" class="img-circle" alt="">
-                <p><br>team member<br><br>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words</p>
-              </div>
-              <div class="testimonial-name">안정은</div>
-            </div>
-              <div class="item">
-                <div class="shadow-effect">
-                  <img src="{{ url_for('static', filename='images/seungwoo.png') }}" class="img-circle" alt="">
-                  <p><br>team member<br><br>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-                </div>
-                <div class="testimonial-name">정동환</div>
-            </div>
-          </div>
+            
+        </div>
       </div>
     </div>
 
-</section>
-<section class="content-section text-center" id="Portfolio">
-  <div class="container">
-    <div class="block-heading">
-      <h2><br><br>Portfolio</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Home Section ======= -->
+    <section class="section">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-md-6" data-aos="fade-up">
+            <h3 class="section-heading">팀원 소개 및<br>우리의 발자취</h3>
+          </div>
+        </div>
+    <section class="section">
+      <div class="container">
+        <div class="row align-items-center">
+          </div>
+          <style>
+            .img-fluid {
+              max-width: 1080px;
+              max-height: 1080px;
+              object-fit: cover;
+            }
+            </style>
+          <div class="col-md-12">
+            <center>
+              <img src="{{ url_for('static', filename = 'images/member2.jpg')}}" alt="Image"  class="img-fluid">
+            </center>
+          </div>
+        </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <center>
+              <img src="{{ url_for('static', filename = 'images/member3.jpg')}}" alt="Image" class="img-fluid">
+            </center>
+          </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <center>
+              <img src="{{ url_for('static', filename = 'images/member1.jpg')}}" alt="Image" class="img-fluid">
+            </center>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <center>
+          <p>우리는 나날이 증가하는 사람들의 건망증에 대한 걱정으로 시작되었습니다.<br>
+          휴대폰과 컴퓨터와 같은 뛰어난 저장매체에 의해 장기 기억의 중요성을 잃은 요즘, <br>
+          시기적절한 예방과 건강한 두뇌활동으로 여러분의 삶에 도움이 되길 바랍니다.</p>
+                         <h3>From 인절미 team</h3>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center text-center">
+        <div class="col-md-7">
+          <p class="copyright">&copy; Copyright SoftLand. All Rights Reserved</p>
+          <div class="credits">
+            <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=SoftLand
+          -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="portfolio-wrapper clearfix">
-      <a class="each-portfolio" data-fancybox="gallery" href="/static/images/p-two.jpeg">
-        <div class="content hover-cont-wrap">
-          <div class="content-overlay"></div>
-          <img class="content-image" src="/static/images/p-two.jpeg">
-          <div class="content-details fadeIn-bottom">
-            <h5 class="p-title">Title</h5>
-            <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            <span class="zoom"><i class="fa fa-search-plus"></i></span>
-          </div>
-        </div>
-      </a>
-      <a class="each-portfolio" data-fancybox="gallery" href="/static/images/p-three.jpeg">
-        <div class="content hover-cont-wrap">
-          <div class="content-overlay"></div>
-          <img class="content-image" src="/static/images/p-three.jpeg">
-          <div class="content-details fadeIn-bottom">
-            <h5 class="p-title">Title</h5>
-            <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            <span class="zoom"><i class="fa fa-search-plus"></i></span>
-          </div>
-        </div>
-      </a>
-      <a class="each-portfolio" data-fancybox="gallery" href="/static/images/p-four.jpeg">
-        <div class="content hover-cont-wrap">
-          <div class="content-overlay"></div>
-          <img class="content-image" src="/static/images/p-four.jpeg">
-          <div class="content-details fadeIn-bottom">
-            <h5 class="p-title">Title</h5>
-            <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            <span class="zoom"><i class="fa fa-search-plus"></i></span>
-          </div>
-        </div>
-      </a>
-      <a class="each-portfolio" data-fancybox="gallery" href="/static/images/p-five.jpeg">
-        <div class="content hover-cont-wrap">
-          <div class="content-overlay"></div>
-          <img class="content-image" src="/static/images/p-five.jpeg">
-          <div class="content-details fadeIn-bottom">
-            <h5 class="p-title">Title</h5>
-            <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            <span class="zoom"><i class="fa fa-search-plus"></i></span>
-          </div>
-        </div>
-      </a>
-      <a class="each-portfolio" data-fancybox="gallery" href="/static/images/p-six.jpeg">
-        <div class="content hover-cont-wrap">
-          <div class="content-overlay"></div>
-          <img class="content-image" src="/static/images/p-six.jpeg">
-          <div class="content-details fadeIn-bottom">
-            <h5 class="p-title">Title</h5>
-            <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            <span class="zoom"><i class="fa fa-search-plus"></i></span>
-          </div>
-        </div>
-      </a>
-      <a class="each-portfolio" data-fancybox="gallery" href="/static/images/p-three.jpeg">
-        <div class="content hover-cont-wrap">
-          <div class="content-overlay"></div>
-          <img class="content-image" src="/static/images/p-three.jpeg">
-          <div class="content-details fadeIn-bottom">
-            <h5 class="p-title">Title</h5>
-            <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            <span class="zoom"><i class="fa fa-search-plus"></i></span>
-          </div>
-        </div>
-      </a>
-      
-    </div>
-  </div>
-</section>
+  </footer>
 
+  
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-</section>
-<footer class="footer text-center">
-  <div class="container">
-    <ul class="list-inline">
-      <li class="list-inline-item">
-        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-          </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
-            <i class="fa fa-twitter" aria-hidden="true"></i>
-          </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="social-link rounded-circle text-white" href="javascript:void(0)">
-            <i class="fa fa-linkedin" aria-hidden="true"></i>
-          </a>
-      </li>
-    </ul>
-    <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
-    <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
-  </div>
-</footer>
+<!-- Vendor JS Files -->
+<script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
 
-  <!--scripts-->
-  <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+<!-- Template Main JS File -->
+<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 
 </body>
 
