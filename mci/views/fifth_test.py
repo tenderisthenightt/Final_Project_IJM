@@ -42,7 +42,7 @@ def get_screenshot():
         img = pf.read()
         result = reader.readtext(img)
         for res in result:
-            if res[1][0:10] == 'Your level':    
+            if res[1][0:10] == 'Your level':
                 level = res[1][-1]
                 result = get_score(int(level))
             else:
